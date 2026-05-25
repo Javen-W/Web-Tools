@@ -1,0 +1,2 @@
+-e ./Nihonez-JLPT
+pytest>=8.3,<9

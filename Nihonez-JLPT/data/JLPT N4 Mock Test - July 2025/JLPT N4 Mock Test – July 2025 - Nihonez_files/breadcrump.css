@@ -1,0 +1,104 @@
+/* .breadcrumb-nav {
+  margin-bottom: 1.5rem;
+} */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.breadcrumb [aria-current="page"] {
+  /* color: hsl(0, 0%, 40%); */
+  color: var(--text-secondary-2);
+  font-weight: 400;
+}
+
+/* Separator styling */
+.breadcrumb li:not(:last-child)::after {
+  /* content: "›"; */
+  content: " » ";
+  margin-left: 0.5rem;
+  /* color: hsl(0, 0%, 60%); */
+  color: var(--text-tertiary);
+  font-size: 1.1rem;
+}
+
+/*  Rankmath*/
+/* Simpler version if you set separator in RankMath settings */
+.rank-math-breadcrumb-container {
+  padding: 0 1rem;
+}
+
+.rank-math-breadcrumb {
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  padding: 12px 0;
+}
+
+.rank-math-breadcrumb-container .rank-math-breadcrumb {
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  margin-bottom: 2rem;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.rank-math-breadcrumb p {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.rank-math-breadcrumb a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.rank-math-breadcrumb a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.rank-math-breadcrumb .last {
+  color: hsl(0, 0%, 40%);
+  font-weight: 400;
+}
+
+.rank-math-breadcrumb .separator {
+  margin: 0 4px;
+  color: hsl(0, 0%, 60%);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .rank-math-breadcrumb {
+    margin-bottom: 0.5rem;
+  }
+}

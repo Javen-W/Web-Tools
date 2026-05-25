@@ -1,0 +1,74 @@
+/* <div class="nihonez-search-form>
+    <input type="text" class="nihonez-search-input" placeholder="Search...">
+            <input type="text" id="nihonez-search-input" placeholder="Search..." enterkeyhint="go" inputmode="search">
+                <button type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+</div> */
+
+/* <form class="nihonez-search-form">
+<input type="text" class="nihonez-search-input" placeholder="Search..." enterkeyhint="go" inputmode="search">
+<button type="submit">
+    <i class="fas fa-search"></i>
+</button>
+</form> */
+
+.nihonez-search-form {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9ca3af;
+}
+.nihonez-search-form .nihonez-search-input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  border-radius: 0.5rem;
+  color: var(--foreground);
+  transition: all 0.1s ease;
+  border: var(--border-xs);
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+  background-color: var(--background);
+}
+
+.nihonez-search-form .nihonez-search-input:focus {
+  /* outline: var(--ring); */
+  /* border: var(--border-xs);
+  outline: 2px solid var(--accent-red); */
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px #dbeafe;
+  background-color: var(--background);
+}
+
+.nihonez-search-form .nihonez-search-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.nihonez-search-form button[type="submit"] {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: var(--muted-foreground);
+  transition: color 0.3s ease;
+  box-shadow: none;
+  color: #9ca3af;
+}
+
+.nihonez-search-form button[type="submit"]:hover {
+  color: #3498db;
+}

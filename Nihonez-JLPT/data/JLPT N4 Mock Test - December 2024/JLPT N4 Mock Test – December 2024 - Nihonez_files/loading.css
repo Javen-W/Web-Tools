@@ -1,0 +1,68 @@
+/* .aicb-loading,
+.no-more-topics,
+.load-error {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--aicb-text);
+}
+
+.aicb-loading::after {
+  content: "Loading...";
+  display: inline-block;
+  animation: ellipsis 1.25s infinite;
+}
+
+.no-more-topics {
+  font-style: italic;
+  color: #888;
+}
+
+.load-error {
+  color: #d9534f;
+}
+
+@keyframes ellipsis {
+  0% {
+    content: "Loading";
+  }
+  25% {
+    content: "Loading.";
+  }
+  50% {
+    content: "Loading..";
+  }
+  75% {
+    content: "Loading...";
+  }
+} */
+
+/* <div id="loading-spinner" class="loading-spinner" style="display: none;">
+<div class="spinner"></div>
+</div> */
+
+.loading-spinner {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #ff5602;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
