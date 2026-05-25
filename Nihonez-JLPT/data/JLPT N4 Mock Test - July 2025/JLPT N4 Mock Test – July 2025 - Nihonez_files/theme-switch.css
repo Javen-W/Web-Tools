@@ -1,0 +1,67 @@
+/* Theme switch style*/
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  user-select: none;
+}
+
+.theme-toggle {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 2.5rem;
+  height: 1.5rem;
+  position: relative;
+  background-color: #ccc;
+  border-radius: 34px;
+  /* transition: background-color 0.4s; */
+  background-color: transparent;
+}
+
+.theme-toggle:hover {
+  /* transform: scale(1.1); */
+  /* background-color: hsl(0, 0%, 98%); */
+  background-color: hsla(0, 0%, 0%, 0.1); /* Slight background on hover */
+}
+html[data-theme="dark"] .theme-toggle:hover {
+  background-color: hsl(0, 0%, 100%, 0.1); /* Slight background on hover */
+}
+
+.theme-toggle .theme-icon {
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* transition: 0.4s; */
+}
+
+.theme-toggle .sun-icon {
+  color: hsl(0, 0%, 10%, 0.7); /* Sun color */
+  display: block;
+}
+
+.theme-toggle .moon-icon {
+  color: var(--text-color);
+  display: none;
+  /* color: hsl(0, 0%, 50%);  */
+}
+
+html[data-theme="dark"] .theme-toggle .sun-icon {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .moon-icon {
+  display: block;
+}
+
+.site-below-footer-wrap[data-section="section-below-footer-builder"] {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-top-color: var(--navbar-bg);
+  height: 30vh;
+}
