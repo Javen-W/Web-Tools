@@ -1,0 +1,564 @@
+:root {
+  /* Core background and text colors */
+  --background-var: 0 0% 100%;
+  --foreground-var: 240 10% 3.9%;
+  --card-var: 0 0% 100%;
+  --card-foreground-var: 240 10% 3.9%;
+  --popover-var: 0 0% 100%;
+  --popover-foreground-var: 240 10% 3.9%;
+  --primary-var: 240 5.9% 10%;
+  --primary-foreground-var: 0 0% 98%;
+  --secondary-var: 240 4.8% 95.9%;
+  --secondary-foreground-var: 240 5.9% 10%;
+  --muted-var: 240 4.8% 95.9%;
+  --muted-foreground-var: 240 3.8% 46.1%;
+  --accent-var: 240 4.8% 95.9%;
+  --accent-foreground-var: 240 5.9% 10%;
+  --border-var: 240 5.9% 90%;
+  --input-var: 240 5.9% 90%;
+  --ring-var: 240 5.9% 10%;
+  /* HSL */
+  --background: hsl(0, 0%, 100%);
+
+  /* Main page background color */
+  --foreground: hsl(240, 10%, 3.9%); /* Primary text color */
+
+  /* Card element colors */
+  --card: hsl(0, 0%, 100%); /* Background color for cards/components */
+  --card-foreground: hsl(240, 10%, 3.9%); /* Text color within cards */
+
+  /* Popup/modal colors */
+  --popover: hsl(0, 0%, 100%); /* Background color for dropdowns/popovers */
+  --popover-foreground: hsl(
+    240,
+    10%,
+    3.9%
+  ); /* Text color in dropdowns/popovers */
+
+  /* Primary action colors */
+  --primary: hsl(240, 5.9%, 10%); /* Main action buttons, active states */
+  --primary-foreground: hsl(0, 0%, 98%); /* Text color on primary buttons */
+
+  /* Secondary/alternative action colors */
+  --secondary: hsl(
+    240,
+    4.8%,
+    95.9%
+  ); /* Secondary buttons, alternative actions */
+  --secondary-foreground: hsl(240, 5.9%, 10%); /* Text on secondary buttons */
+
+  /* Subtle/background element colors */
+  /* --muted: hsl(240, 4.8%, 95.9%);  */
+  --muted: hsl(240, 4.8%, 94.9%);
+
+  /* Subtle background, disabled states */
+  --muted-foreground: hsl(240, 3.8%, 46.1%); /* Subtle text, placeholder text */
+
+  /* Highlight/hover colors */
+  --accent: hsl(240, 4.8%, 95.9%); /* Hover states, highlighted elements */
+  --accent-foreground: hsl(240, 5.9%, 10%); /* Text on highlighted elements */
+
+  /* Border and form element colors */
+  --border: hsl(240, 5.9%, 90%); /* Border color for elements */
+  --input: hsl(240, 5.9%, 90%); /* Form input borders and backgrounds */
+  --ring: hsl(240, 5.9%, 10%); /* Focus ring color, shadows */
+
+  --shadow-color: 240 3.8% 46.1%;
+  --shadow-strength: 3%;
+  --shadow-xs: 0px 1px 2px hsl(var(--shadow-color) / 0.05);
+  --shadow-sm:
+    0px 1px 3px hsl(var(--shadow-color) / 0.1),
+    0px 1px 2px hsl(var(--shadow-color) / 0.06);
+  --shadow-md:
+    0px 4px 6px -1px hsl(var(--shadow-color) / 0.1),
+    0px 2px 4px -1px hsl(var(--shadow-color) / 0.06);
+  --shadow-lg:
+    0px 10px 15px -3px hsl(var(--shadow-color) / 0.1),
+    0px 4px 6px -2px hsl(var(--shadow-color) / 0.05);
+  --shadow-xl:
+    0px 20px 25px -5px hsl(var(--shadow-color) / 0.1),
+    0px 10px 10px -5px hsl(var(--shadow-color) / 0.04);
+
+  /* Border Colors and Properties */
+  --border-base: hsl(240 5.9% 90%);
+  --border-strength: 1;
+  --border-xs: 1px solid hsl(240 5.9% 90% / var(--border-strength));
+  --border-sm: 2px solid hsl(240 5.9% 90% / var(--border-strength));
+  --border-md: 3px solid hsl(240 5.9% 90% / var(--border-strength));
+
+  /* Ring (Focus) Colors and Properties */
+  --ring-color: hsl(240 5.9% 10%);
+  --ring-offset: 2px;
+  --ring-width: 2px;
+
+  --input-height: 2.5rem;
+  --input-font: 0.875rem;
+  --checkbox-size: 1rem;
+  --dropdown-max-height: 15rem;
+}
+
+[data-theme="dark"] {
+  --background-var: 0 0% 10%;
+  --foreground-var: 0 0% 98%;
+  --card-var: 240 10% 3.9%;
+  --card-foreground-var: 0 0% 98%;
+  --popover-var: 240 10% 3.9%;
+  --popover-foreground-var: 0 0% 98%;
+  --primary-var: 0 0% 98%;
+  --primary-foreground-var: 240 5.9% 10%;
+  --secondary-var: 240 3.7% 20.9%;
+  --secondary-foreground-var: 0 0% 98%;
+  --muted-var: 240 3.7% 15.9%;
+  --muted-foreground-var: 240 5% 64.9%;
+  --accent-var: 240 3.7% 15.9%;
+  --accent-foreground-var: 0 0% 98%;
+  /* --border-var: 240 3.7% 15.9%; */
+  --border-var: 240 3.7% 20.9%;
+  --input-var: 240 3.7% 15.9%;
+  --ring-var: 240 4.9% 83.9%;
+
+  /* Dark mode colors */
+  /* --background: hsl(240, 10%, 4%); */
+
+  --background: hsl(0, 0%, 10%);
+  --foreground: hsl(0, 0%, 98%);
+  /* --card: hsl(240, 10%, 3.9%); */
+  --card: hsl(0, 0%, 12%);
+  /* --card: var(--primary-color); */
+
+  --card-foreground: hsl(0, 0%, 98%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --primary: hsl(0, 0%, 98%);
+  --primary-foreground: hsl(240, 5.9%, 10%);
+  --secondary: hsl(240, 3.7%, 20.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 20.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --ring: hsl(240, 4.9%, 83.9%);
+
+  --shadow-color: 0 0% 0%;
+  --shadow-strength: 20%;
+  --shadow-xs: 0px 1px 2px hsl(var(--shadow-color) / 0.15);
+  --shadow-sm:
+    0px 1px 3px hsl(var(--shadow-color) / 0.25),
+    0px 1px 2px hsl(var(--shadow-color) / 0.15);
+  --shadow-md:
+    0px 4px 6px -1px hsl(var(--shadow-color) / 0.25),
+    0px 2px 4px -1px hsl(var(--shadow-color) / 0.15);
+  --shadow-lg:
+    0px 10px 15px -3px hsl(var(--shadow-color) / 0.25),
+    0px 4px 6px -2px hsl(var(--shadow-color) / 0.15);
+  --shadow-xl:
+    0px 20px 25px -5px hsl(var(--shadow-color) / 0.25),
+    0px 10px 10px -5px hsl(var(--shadow-color) / 0.15);
+
+  /* Dark mode border adjustments */
+  --border-base: hsl(240 3.7% 15.9%);
+  --border-strength: 0.8;
+
+  /* Dark mode ring adjustments */
+  --ring-color: hsl(240 4.9% 83.9%);
+}
+
+:root {
+  /* Palletet 1 */
+  --plum-web: hsl(299, 84%, 83%);
+  --plum-web-1: hsl(299, 100%, 83%); /* light mode */
+  --plum-web-2: hsl(299, 70%, 83%);
+  --plum-web-3: hsl(299, 70%, 90%);
+
+  --lavender-floral: hsl(266, 71%, 73%);
+  --lavender-floral-1: #b175ff;
+
+  /* astra co9lor:0067FF */
+  --indigo-300: hsl(229.7 93.5% 81.8%);
+  --indigo-400: hsl(234.5 89.5% 73.9%);
+  --indigo-500: hsl(238.7 83.5% 66.7%);
+  --vista-blue-new: hsl(230, 68%, 65%);
+  --vista-blue: hsl(230, 80%, 72%);
+  --vista-blue-1: hsl(240, 80%, 69%);
+  --vista-blue-2: hsl(230, 80%, 62%);
+
+  --quizlet-color: hsl(233.97, 100%, 62.94%);
+
+  --vista-blue-3: hsl(230, 80%, 50%);
+  --vista-blue-4: hsl(230, 80%, 85%);
+
+  --sky-blue: hsl(192, 89%, 71%);
+  --sky-blue-1: hsl(192, 100%, 60%);
+  --sky-blue-2: hsl(192, 89%, 50%);
+  --sky-blue-3: hsl(192, 89%, 40%);
+  --transparent-blue: hsl(192, 89%, 40%);
+
+  --baby-powder: hsl(60, 24%, 94%);
+  --baby-powder-1: hsl(60, 36%, 90%);
+
+  --jonquil: hsl(50, 94%, 49%);
+  --jonquil-1: hsl(50, 100%, 49%);
+
+  --bright-pink: hsl(355, 87%, 66%);
+  --orange-wheel: hsl(26, 85%, 57%);
+  --raisin-black: hsl(0, 0%, 15%);
+  --tea-rose: hsl(0, 100%, 92%);
+  --light-blue: hsl(210, 100%, 70%);
+  --red-japanese: hsl(353, 100%, 45%);
+  --red-japanese: hsl(353, 90%, 45%);
+  --red-japanese-1: hsl(353, 100%, 60%);
+  --red-japanese-2: hsl(353, 80%, 40%);
+
+  /* Pallete4 */
+  /* --mahogany: hsl(22, 99%, 39%); */
+  /* --mahogany: hsl(19.92, 85%, 50.39%); */
+  --mahogany: hsl(20, 100%, 50%);
+  --mahogany-1: hsl(22, 100%, 44%);
+  --blue: hsl(193, 82%, 41%);
+  --orange: hsl(4, 100%, 62%);
+  /*   hsl(19.92deg 100% 50.39%)
+   */
+  --persian-blue: hsl(234, 77%, 43%);
+  --polinesthia-blue: hsl(209, 100%, 30%);
+  --denim: hsl(209, 100%, 36%);
+  --celtic-blue: hsl(209, 100%, 40%);
+  --jade: hsl(163, 100%, 33%);
+  --green-yellow: hsl(84, 91%, 68%);
+
+  /* Pallete 2 */
+  --aero: hsl(198, 78%, 64%);
+  --maize: hsl(53, 98%, 65%);
+  --yellow-green: hsl(79, 54%, 51%);
+  --persion-red: hsl(1, 52%, 51%);
+  --raisin-black: hsl(326, 12%, 12%);
+  --polynesian-blue: hsl(210, 93%, 29%);
+
+  /* Pallete 3 */
+  --selective-yellow: hsl(42, 100%, 49%);
+  --gold: hsl(48, 100%, 61%);
+  --salmon-pink: hsl(352, 100%, 82%);
+  --honolulu-blue: hsl(201, 100%, 37%);
+  --pigment-green: hsl(149, 100%, 34%);
+
+  /* Black */
+  --dark-gray: hsl(0, 0%, 12%);
+  --gray-20: hsl(0, 0%, 20%);
+  --medium-gray: hsl(0, 0%, 17%);
+  --eerie-black: hsl(0, 0%, 10%);
+  --dark-black: hsl(0, 0%, 5%);
+  --black: hsl(0, 0%, 0%);
+
+  /* White */
+  --white: hsl(0, 0%, 100%);
+  --white-1: hsl(10, 5%, 98%);
+
+  --light-gray: hsl(0, 0%, 90%);
+  --light-gray-1: hsl(0, 0%, 85%);
+
+  --light-gray-2: hsl(240, 6%, 90%);
+
+  --dark-muted-foreground: hsl(240 5% 64.9%);
+  --light-muted-foreground: hsl(240 3.8% 46.1%);
+
+  /* Set color here: Default to light mode*/
+  --navbar-bg: var(--white);
+  --background-color: var(--white);
+  --text-color: var(--medium-gray);
+  --muted-text-color: var(var(--light-muted-foreground));
+  --link-color: var(--light-blue);
+  --heading-color: var(--text-color);
+  --border-color: var(--light-gray-2);
+  --border-color-1: hsl(220, 13%, 91%);
+
+  --primary-color: var(--white);
+  --secondary-color: var(--medium-gray);
+
+  /* --accent-color-1: var(--vista-blue); */
+  /* --accent-color-1: var(--accent-primary-light); */
+  /* --accent-color-1: #2563eb; */
+  --accent-color-1-var: 206 62% 45%;
+  --accent-color-2-var: 0 64% 55%;
+  /* --accent-color-1: hsl(206, 62%, 45%); */
+  /* --accent-color-1: hsl(213, 88%, 60%); */
+
+  /* --accent-color-1: rgb(33, 148, 242); */
+
+  --accent-color-1: hsl(207, 73%, 57%);
+  --accent-blue: hsl(212, 72%, 59%);
+  --accent-blue-hover: hsl(210, 56%, 47%);
+  /* --accent-color-1: hsl(229, 76%, 66%);
+  --accent-blue: hsl(229, 76%, 66%);
+  --accent-blue-hover: hsl(234, 62%, 60%); */
+
+  --accent-color-2: hsl(0, 64%, 55%);
+  --accent-red: hsl(0, 69%, 67%);
+  /* --accent-color-2: hsl(0, 64%, 60%); */
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --box-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* --accent-color-2: var(--baby-powder); */
+  /* --accent-color-3: var(--lavender-floral); */
+  --accent-bg: #f7f7f7;
+}
+
+[data-theme="dark"] {
+  --accent-bg: #212121;
+
+  /* --navbar-bg: var(--dark-gray); */
+  --navbar-bg: var(--eerie-black);
+  --link-color: var(--light-blue);
+  --text-color: var(--white);
+  --link-color: var(--light-blue);
+  --heading-color: var(--white);
+  --background-color: var(--eerie-black);
+  --muted-text-color: var(--dark-muted-foreground);
+
+  --box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  --box-shadow-sm: 0 2px 4px hsl(var(--shadow-color));
+
+  /* Color to use */
+  --primary-color: var(--medium-gray);
+  --secondary-color: var(--white);
+}
+
+:root {
+  /* --primary: hsl(207, 90%, 57%); */
+  /* Here is my main color theme */
+  --primary: hsl(202, 85%, 61%);
+  --primary-light: hsl(212, 72%, 70%);
+  --primary-light-1: hsl(207, 100%, 97%);
+  --primary-1: hsl(207, 85%, 62%);
+  --primary-dark: hsl(207, 73%, 57%);
+  --secondary-0: hsl(0, 69%, 95%);
+  --secondary-red: hsl(0, 69%, 67%);
+  --secondary-1: hsl(0, 60%, 60%);
+  --secondary-2: hsl(0, 64%, 55%);
+  --secondary-box-shadow: hsl(0 69% 85% / 0.9);
+  --secondary-light: hsl(0, 60%, 72%);
+  --tertiary: hsl(230, 80%, 72%);
+  --tertiary-dark: #6772e5;
+  --primary-box-shadow-color: hsla(202, 85%, 61%, 0.1);
+
+  --text-dark: hsl(0, 0%, 17%);
+  /* Headings */
+  --text-medium: #5a5a5a;
+  /* body text */
+  --text-light: #757575;
+  /* label-captionss */
+  --bg-light: #f8fafc;
+  --bg-white: #ffffff;
+  --box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  --text-primary-1: hsl(0, 0%, 20%);
+  --text-secondary-1: hsl(0, 0%, 33%);
+  --text-light-1: hsl(0, 0%, 47%);
+  --text-primary: hsl(0, 0%, 10%);
+  --text-secondary: hsl(0, 0%, 35%);
+  --text-tertiary: hsl(0, 0%, 55%);
+  --nav-text: hsl(0, 0%, 20%);
+  --nav-text-hover: hsl(0, 0%, 0%);
+  --text-primary-2: hsl(0, 0%, 13%);
+  --text-secondary-2: hsl(0, 0%, 40%);
+}
+
+[data-theme="dark"] {
+  /* For background 1a1a1a */
+  /* --text-dark: hsl(0, 0%, 96%);
+  --text-medium: hsl(0, 0%, 88%);
+  --text-light: hsl(0, 0%, 88%); */
+  --text-primary-1: hsl(0, 0%, 80%);
+  --text-secondary-1: hsl(0, 0%, 70%);
+  --text-tertiary-1: hsl(0, 0%, 50%);
+  --text-primary: hsl(0, 0%, 95%);
+  --text-secondary: hsl(0, 0%, 75%);
+  --text-tertiary: hsl(0, 0%, 55%);
+  --text-primary-2: hsl(0, 0%, 95%);
+  --text-secondary-2: hsl(0, 0%, 75%);
+  --text-tertiary-2: hsl(0, 0%, 55%);
+
+  --nav-text: hsl(0, 0%, 85%);
+  --nav-text-hover: hsl(0, 0%, 100%);
+
+  --text-dark: hsl(0, 0%, 90%);
+  --text-medium: hsl(0, 0%, 86%);
+  --text-light: hsl(0, 0%, 82%);
+  --primary-light-1: hsl(207, 100%, 5%);
+
+  --text-dark-dm: #f1f5f9;
+  --text-medium-dm: #cbd5e1;
+  --text-light-dm: #94a3b8;
+  --bg-light-dm: #1e293b;
+  --bg-white-dm: #0f172a;
+  --box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.2), 0 0 15px 5px rgba(255, 255, 255, 0.05),
+    0 0 30px 10px rgba(255, 255, 255, 0.03);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  box-sizing: border-box;
+}
+
+.ast-container {
+  background-color: var(--background);
+  color: var(--foreground);
+  padding: 0;
+  margin: 0;
+}
+
+#nihonez-primary {
+  width: 100%;
+  max-width: 100%;
+  /* min-height: 100vh; */
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.page-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+/* .page-container {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0;
+  width: 100%;
+} */
+
+.one-col-page-container {
+  padding: 1rem;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1280px;
+}
+
+/* Reset astra */
+@media (max-width: 544px) {
+  .ast-separate-container #content .ast-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+/* I dont know for what */
+
+@media (min-width: 922px) {
+  header .ast-container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1.5rem;
+  }
+  .page-container {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .ast-container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .one-col-page-container {
+    padding: 1rem;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 1280px;
+  }
+
+  .sidebar {
+    border-top: none;
+    border-bottom: none;
+  }
+}
+
+@media (min-width: 1024px) {
+}
+
+@media (min-width: 425px) {
+  /* Styles for screens 425px and wider */
+}
+
+/* Small devices (sm) */
+@media (min-width: 640px) {
+}
+
+@media (min-width: 768px) {
+}
+/* This is because of astra? I dont know what i use astra for anyway */
+@media (min-width: 922px) {
+}
+@media (min-width: 1024px) {
+}
+
+@media (min-width: 1280px) {
+}
+
+.flashcard-main {
+  top: 0;
+  right: 0;
+  z-index: 3;
+  transform: rotate(3deg);
+}
+
+.component-label {
+  position: absolute;
+  font-size: 0.75rem;
+  background-color: var(--accent-light);
+  color: var(--accent-dark);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.kanji-label {
+  top: -10px;
+  left: 10px;
+}
+
+.furigana-label {
+  top: 80px;
+  right: -15px;
+}
+
+.meaning-label {
+  bottom: -10px;
+  left: 15px;
+}
+
+.option-item.correct {
+  background: linear-gradient(135deg, var(--success) 0%, #20c997 100%);
+  color: white;
+  border-color: var(--success);
+}
+
+.option-item.incorrect {
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--accent-light) 100%
+  );
+  color: white;
+  border-color: var(--accent);
+}
+
+.option-item.user-incorrect {
+  background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%);
+  color: #212529;
+  border-color: #ffc107;
+}

@@ -1,0 +1,560 @@
+/* ---------------------------------------------------------------
+   NihonEZ shared notes panel — minimalist / Notion-inspired
+   Used by any plugin via nihonez_render_notes_panel().
+--------------------------------------------------------------- */
+.nihonez-notes-panel {
+    margin: 20px 0 28px;
+    padding: 20px 0 0;
+    background: transparent;
+    border-top: 1px solid #e9e9e7;
+}
+
+.nihonez-notes-panel--guest {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 2px;
+}
+
+.nihonez-notes-login-link {
+    font-size: 13px;
+    color: #787774;
+    text-decoration: none;
+}
+
+.nihonez-notes-login-link:hover {
+    color: #37352f;
+    text-decoration: underline;
+}
+
+.nihonez-notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding: 0 2px;
+}
+
+.nihonez-notes-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #9b9a97;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.nihonez-notes-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nihonez-notes-status {
+    font-size: 11px;
+    color: #9b9a97;
+    transition: color 0.2s;
+}
+
+.nihonez-notes-status[data-kind="ok"]      { color: #0f7b6c; }
+.nihonez-notes-status[data-kind="pending"] { color: #9b9a97; }
+.nihonez-notes-status[data-kind="error"]   { color: #e03e3e; }
+
+.nihonez-notes-add-btn,
+.nihonez-notes-add-btn:focus,
+.nihonez-notes-add-btn:active {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    margin: 0;
+    background: transparent;
+    color: #9b9a97;
+    border: none;
+    border-radius: 4px;
+    box-shadow: none;
+    text-shadow: none;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: background 0.1s, color 0.1s;
+}
+
+.nihonez-notes-add-btn:hover {
+    background: #f1f1ef;
+    color: #37352f;
+}
+
+.nihonez-notes-add-btn svg {
+    fill: none;
+    stroke: currentColor;
+    display: block;
+}
+
+.nihonez-notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nihonez-notes-list.is-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nihonez-notes-list.is-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+    align-items: start;
+}
+
+.nihonez-notes-empty {
+    color: #9b9a97;
+    font-size: 13px;
+    padding: 6px 2px;
+    grid-column: 1 / -1;
+}
+
+.nihonez-notes-view-toggle {
+    display: inline-flex;
+    border: 1px solid #ececec;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.nihonez-notes-view-btn,
+.nihonez-notes-view-btn:focus,
+.nihonez-notes-view-btn:active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 24px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    color: #9b9a97;
+    cursor: pointer;
+    box-shadow: none;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: background 0.12s, color 0.12s;
+}
+
+.nihonez-notes-view-btn + .nihonez-notes-view-btn {
+    border-left: 1px solid #ececec;
+}
+
+.nihonez-notes-view-btn:hover {
+    background: #f7f6f3;
+    color: #37352f;
+}
+
+.nihonez-notes-view-btn.is-active {
+    background: #f1f1ef;
+    color: #37352f;
+}
+
+.nihonez-notes-view-btn svg {
+    display: block;
+}
+
+/* Note card */
+.nihonez-note-card,
+.nihonez-note-card:hover,
+.nihonez-note-card:focus,
+.nihonez-note-card:focus-within {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    overflow: hidden;
+    outline: none;
+    transition: box-shadow 0.18s, border-color 0.18s;
+}
+
+.nihonez-note-card:hover {
+    box-shadow: 0 4px 18px rgba(55, 53, 47, 0.06);
+    border-color: #e2e2e2;
+}
+
+.nihonez-note-card.is-expanded {
+    border-color: #e2e2e2;
+}
+
+.nihonez-note-card input,
+.nihonez-note-card input:focus,
+.nihonez-note-card input:hover,
+.nihonez-note-card input:active,
+.nihonez-note-card textarea,
+.nihonez-note-card textarea:focus,
+.nihonez-note-card textarea:hover,
+.nihonez-note-card textarea:active,
+.nihonez-note-card button,
+.nihonez-note-card button:focus,
+.nihonez-note-card button:active {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-image: none;
+}
+
+.nihonez-note-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.18s;
+}
+
+.nihonez-note-card.is-expanded .nihonez-note-card-header {
+    border-bottom-color: #ececec;
+}
+
+.nihonez-note-pencil-btn,
+.nihonez-note-pencil-btn:hover,
+.nihonez-note-pencil-btn:focus,
+.nihonez-note-pencil-btn:active {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    min-width: 0;
+    border-radius: 50%;
+    background: #f7eff8;
+    color: #a07ca8;
+    border: none;
+    box-shadow: none;
+    text-shadow: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.nihonez-note-pencil-btn:hover {
+    background: #efe1f2;
+    color: #7e5689;
+}
+
+.nihonez-note-pencil-btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(160, 124, 168, 0.25);
+}
+
+.nihonez-note-card.is-expanded .nihonez-note-pencil-btn,
+.nihonez-note-card.is-expanded .nihonez-note-pencil-btn:hover {
+    background: #ead7ee;
+    color: #6e4a78;
+}
+
+.nihonez-note-pencil-btn svg {
+    width: 13px;
+    height: 13px;
+    display: block;
+    fill: none;
+    stroke: currentColor;
+    flex-shrink: 0;
+}
+
+.nihonez-note-title-wrap {
+    flex: 1;
+    min-width: 0;
+}
+
+.nihonez-note-title-input,
+.nihonez-note-title-input:focus,
+.nihonez-note-title-input:focus-visible,
+.nihonez-note-title-input:hover,
+.nihonez-note-title-input:active {
+    width: 100%;
+    border: none;
+    background: transparent;
+    box-shadow: none !important;
+    font-family: "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: #2b2b2b;
+    outline: none;
+    padding: 0 !important;
+    padding-inline-start: 0;
+    text-indent: 0;
+    margin: 0;
+    min-width: 0;
+    line-height: 1.3;
+    letter-spacing: 0;
+    cursor: text;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 0;
+    transition: none !important;
+    transform: none !important;
+    scale: 1 !important;
+    zoom: 1 !important;
+    text-shadow: none;
+}
+
+.nihonez-note-title-input::placeholder {
+    color: #b9b8b4;
+    font-weight: 400;
+    font-style: italic;
+    opacity: 1;
+}
+
+.nihonez-note-card:not(.is-expanded) .nihonez-note-title-input {
+    pointer-events: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.nihonez-note-preview {
+    display: none;
+    margin: 2px 0 0;
+    padding: 0;
+    text-indent: 0;
+    font-family: inherit;
+    font-size: 12px;
+    font-style: italic;
+    color: #9b9a97;
+    line-height: 1.35;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nihonez-note-card:not(.is-expanded) .nihonez-note-preview:not(:empty) {
+    display: block;
+}
+
+.nihonez-note-meta {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nihonez-note-date {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 11px;
+    color: #9b9a97;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+.nihonez-note-card-body {
+    display: none;
+    padding: 0 12px 10px 48px;
+    border: none;
+    margin: 0;
+}
+
+.nihonez-note-card.is-expanded .nihonez-note-card-body {
+    display: block;
+    padding-top: 4px;
+}
+
+.nihonez-note-textarea,
+.nihonez-note-textarea:focus,
+.nihonez-note-textarea:hover {
+    width: 100%;
+    min-height: 56px;
+    height: 56px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    font-family: inherit;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #37352f;
+    resize: vertical;
+    box-sizing: border-box;
+    background: transparent;
+    display: block;
+}
+
+.nihonez-note-textarea::placeholder {
+    color: #c4c4c0;
+    opacity: 1;
+}
+
+.nihonez-note-card-footer {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.nihonez-note-card .nihonez-note-delete-btn,
+.nihonez-note-card .nihonez-note-delete-btn:focus,
+.nihonez-note-card .nihonez-note-delete-btn:active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e5e5e3;
+    color: #6b6a66;
+    font-family: inherit;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    border-radius: 6px;
+    box-shadow: none;
+    text-shadow: none;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.nihonez-note-card .nihonez-note-delete-btn svg {
+    display: block;
+    fill: none;
+    stroke: currentColor;
+}
+
+.nihonez-note-card .nihonez-note-delete-btn:hover {
+    color: #c4392f;
+    border-color: #f0c4c0;
+    background: #fdf6f5;
+    box-shadow: none;
+}
+
+.nihonez-note-delete-btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(196, 57, 47, 0.15);
+}
+
+/* ---------------------------------------------------------------
+   Note category — dropdown + badge + pastel accents
+--------------------------------------------------------------- */
+.nihonez-note-card .nihonez-note-category-select,
+.nihonez-note-card .nihonez-note-category-select:focus,
+.nihonez-note-card .nihonez-note-category-select:hover,
+.nihonez-note-card .nihonez-note-category-select:active {
+    width: auto;
+    flex: 0 0 auto;
+    height: 26px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 12px;
+    line-height: 1;
+    color: #37352f;
+    background: #fff;
+    border: 1px solid #e5e5e3;
+    border-radius: 6px;
+    padding: 0 22px 0 10px;
+    margin: 0;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none' stroke='%239b9a97' stroke-width='1.6' stroke-linecap='round'%3e%3cpath d='M1 1l4 4 4-4'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 6px center;
+}
+
+.nihonez-note-category-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1px 6px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0;
+    border-radius: 3px;
+    background: #e3e2e0;
+    color: #32302c;
+    white-space: nowrap;
+}
+
+.nihonez-note-title-meta {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 10px;
+}
+
+.nihonez-notes-list.is-columns .nihonez-note-title-meta {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nihonez-notes-list.is-columns .nihonez-note-meta { display: none; }
+
+/* Pastel pencil-button backgrounds per category */
+.nihonez-note-card.nihonez-note-category-general  .nihonez-note-pencil-btn { background: #e3e2e0; color: #32302c; }
+.nihonez-note-card.nihonez-note-category-vocab    .nihonez-note-pencil-btn { background: #d3e5ef; color: #183347; }
+.nihonez-note-card.nihonez-note-category-grammar  .nihonez-note-pencil-btn { background: #dbeddb; color: #1c3829; }
+.nihonez-note-card.nihonez-note-category-opinion  .nihonez-note-pencil-btn { background: #fadec9; color: #5c3b23; }
+.nihonez-note-card.nihonez-note-category-question .nihonez-note-pencil-btn { background: #fdecc8; color: #5b3b1a; }
+.nihonez-note-card.nihonez-note-category-example  .nihonez-note-pencil-btn { background: #e8deee; color: #492954; }
+.nihonez-note-card.nihonez-note-category-diary    .nihonez-note-pencil-btn { background: #f5e0e9; color: #4c2337; }
+.nihonez-note-card.nihonez-note-category-strategy .nihonez-note-pencil-btn { background: #d6dcfb; color: #1e2a6b; }
+.nihonez-note-card.nihonez-note-category-kanji    .nihonez-note-pencil-btn { background: #efe4d0; color: #4a3a1d; }
+.nihonez-note-card.nihonez-note-category-mnemonic .nihonez-note-pencil-btn { background: #fff2a8; color: #5b4b08; }
+.nihonez-note-card.nihonez-note-category-trap     .nihonez-note-pencil-btn { background: #b5e2dd; color: #1c4540; }
+.nihonez-note-card.nihonez-note-category-mistake  .nihonez-note-pencil-btn { background: #fbd0cc; color: #6b1f15; }
+
+.nihonez-note-card.nihonez-note-category-general  .nihonez-note-pencil-btn:hover { background: #d3d2d0; color: #1f1d1a; }
+.nihonez-note-card.nihonez-note-category-vocab    .nihonez-note-pencil-btn:hover { background: #b8d1de; color: #102536; }
+.nihonez-note-card.nihonez-note-category-grammar  .nihonez-note-pencil-btn:hover { background: #c2dcc2; color: #0f2418; }
+.nihonez-note-card.nihonez-note-category-opinion  .nihonez-note-pencil-btn:hover { background: #f3c9ad; color: #3f2614; }
+.nihonez-note-card.nihonez-note-category-question .nihonez-note-pencil-btn:hover { background: #f7daaa; color: #3f2710; }
+.nihonez-note-card.nihonez-note-category-example  .nihonez-note-pencil-btn:hover { background: #d8c4e0; color: #2f1738; }
+.nihonez-note-card.nihonez-note-category-diary    .nihonez-note-pencil-btn:hover { background: #eac6d4; color: #361626; }
+.nihonez-note-card.nihonez-note-category-strategy .nihonez-note-pencil-btn:hover { background: #b8c2f5; color: #131c4d; }
+.nihonez-note-card.nihonez-note-category-kanji    .nihonez-note-pencil-btn:hover { background: #decbab; color: #2f230f; }
+.nihonez-note-card.nihonez-note-category-mnemonic .nihonez-note-pencil-btn:hover { background: #fde885; color: #423704; }
+.nihonez-note-card.nihonez-note-category-trap     .nihonez-note-pencil-btn:hover { background: #94cfc7; color: #0f2e2a; }
+.nihonez-note-card.nihonez-note-category-mistake  .nihonez-note-pencil-btn:hover { background: #f4b3ac; color: #481109; }
+
+.nihonez-note-card.nihonez-note-category-general.is-expanded  .nihonez-note-pencil-btn { background: #d3d2d0; color: #1f1d1a; }
+.nihonez-note-card.nihonez-note-category-vocab.is-expanded    .nihonez-note-pencil-btn { background: #b8d1de; color: #102536; }
+.nihonez-note-card.nihonez-note-category-grammar.is-expanded  .nihonez-note-pencil-btn { background: #c2dcc2; color: #0f2418; }
+.nihonez-note-card.nihonez-note-category-opinion.is-expanded  .nihonez-note-pencil-btn { background: #f3c9ad; color: #3f2614; }
+.nihonez-note-card.nihonez-note-category-question.is-expanded .nihonez-note-pencil-btn { background: #f7daaa; color: #3f2710; }
+.nihonez-note-card.nihonez-note-category-example.is-expanded  .nihonez-note-pencil-btn { background: #d8c4e0; color: #2f1738; }
+.nihonez-note-card.nihonez-note-category-diary.is-expanded    .nihonez-note-pencil-btn { background: #eac6d4; color: #361626; }
+.nihonez-note-card.nihonez-note-category-strategy.is-expanded .nihonez-note-pencil-btn { background: #b8c2f5; color: #131c4d; }
+.nihonez-note-card.nihonez-note-category-kanji.is-expanded    .nihonez-note-pencil-btn { background: #decbab; color: #2f230f; }
+.nihonez-note-card.nihonez-note-category-mnemonic.is-expanded .nihonez-note-pencil-btn { background: #fde885; color: #423704; }
+.nihonez-note-card.nihonez-note-category-trap.is-expanded     .nihonez-note-pencil-btn { background: #94cfc7; color: #0f2e2a; }
+.nihonez-note-card.nihonez-note-category-mistake.is-expanded  .nihonez-note-pencil-btn { background: #f4b3ac; color: #481109; }
+
+.nihonez-note-card.nihonez-note-category-general  .nihonez-note-category-badge { background: #e3e2e0; color: #32302c; }
+.nihonez-note-card.nihonez-note-category-vocab    .nihonez-note-category-badge { background: #d3e5ef; color: #183347; }
+.nihonez-note-card.nihonez-note-category-grammar  .nihonez-note-category-badge { background: #dbeddb; color: #1c3829; }
+.nihonez-note-card.nihonez-note-category-opinion  .nihonez-note-category-badge { background: #fadec9; color: #5c3b23; }
+.nihonez-note-card.nihonez-note-category-question .nihonez-note-category-badge { background: #fdecc8; color: #5b3b1a; }
+.nihonez-note-card.nihonez-note-category-example  .nihonez-note-category-badge { background: #e8deee; color: #492954; }
+.nihonez-note-card.nihonez-note-category-diary    .nihonez-note-category-badge { background: #f5e0e9; color: #4c2337; }
+.nihonez-note-card.nihonez-note-category-strategy .nihonez-note-category-badge { background: #d6dcfb; color: #1e2a6b; }
+.nihonez-note-card.nihonez-note-category-kanji    .nihonez-note-category-badge { background: #efe4d0; color: #4a3a1d; }
+.nihonez-note-card.nihonez-note-category-mnemonic .nihonez-note-category-badge { background: #fff2a8; color: #5b4b08; }
+.nihonez-note-card.nihonez-note-category-trap     .nihonez-note-category-badge { background: #b5e2dd; color: #1c4540; }
+.nihonez-note-card.nihonez-note-category-mistake  .nihonez-note-category-badge { background: #fbd0cc; color: #6b1f15; }
