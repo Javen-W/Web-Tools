@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Callable
 from datetime import UTC, datetime
-from html import escape
 from pathlib import Path
+import re
 from urllib.parse import unquote, urljoin
 
 from bs4 import BeautifulSoup
@@ -56,9 +56,17 @@ def _parse_section(
     title_node = section_node.select_one(".test-section-title h2")
     title = title_node.get_text(" ", strip=True) if title_node else "Untitled Section"
     subsections: list[ReportSubsection] = []
+    replace_question_images = title == "聴解"
 
     for subsection_node in section_node.find_all("div", class_="test-subsection", recursive=False):
-        subsections.append(_parse_subsection(subsection_node, resolver, subsection_titles))
+        subsections.append(
+            _parse_subsection(
+                subsection_node,
+                resolver,
+                subsection_titles,
+                replace_question_images=replace_question_images,
+            )
+        )
 
     return ReportSection(title=title, subsections=subsections)
 
@@ -67,6 +75,8 @@ def _parse_subsection(
     subsection_node: Tag,
     resolver: Callable[[str], str],
     subsection_titles: dict[str, str],
+    *,
+    replace_question_images: bool,
 ) -> ReportSubsection:
     subsection_id = subsection_node.get("id", "")
     title_node = subsection_node.find("h3", recursive=False)
@@ -85,18 +95,36 @@ def _parse_subsection(
 
         classes = set(child.get("class", []))
         if "passage-question-group" in classes:
-            items.extend(_parse_passage_question_group(child, resolver))
+            items.extend(
+                _parse_passage_question_group(
+                    child,
+                    resolver,
+                    replace_question_images=replace_question_images,
+                )
+            )
         elif "question-container" in classes:
-            items.append(ReportItem(kind="question", html=_clean_question_html(child, resolver)))
+            items.append(
+                ReportItem(
+                    kind="question",
+                    html=_clean_question_html(
+                        child,
+                        resolver,
+                        replace_question_images=replace_question_images,
+                    ),
+                )
+            )
         elif "jlpt-passages-wrapper" in classes:
             items.append(ReportItem(kind="passage", html=_clean_passage_html(child, resolver)))
-        elif "audio-player-container" in classes:
-            items.append(ReportItem(kind="audio", html=_build_audio_reference_html(child, resolver)))
 
     return ReportSubsection(title=title, items=items)
 
 
-def _parse_passage_question_group(group_node: Tag, resolver: Callable[[str], str]) -> list[ReportItem]:
+def _parse_passage_question_group(
+    group_node: Tag,
+    resolver: Callable[[str], str],
+    *,
+    replace_question_images: bool,
+) -> list[ReportItem]:
     items: list[ReportItem] = []
 
     for child in group_node.children:
@@ -106,7 +134,16 @@ def _parse_passage_question_group(group_node: Tag, resolver: Callable[[str], str
         if "jlpt-passages-wrapper" in classes:
             items.append(ReportItem(kind="passage", html=_clean_passage_html(child, resolver)))
         elif "question-container" in classes:
-            items.append(ReportItem(kind="question", html=_clean_question_html(child, resolver)))
+            items.append(
+                ReportItem(
+                    kind="question",
+                    html=_clean_question_html(
+                        child,
+                        resolver,
+                        replace_question_images=replace_question_images,
+                    ),
+                )
+            )
 
     return items
 
@@ -115,6 +152,14 @@ def _clean_passage_html(node: Tag, resolver: Callable[[str], str]) -> str:
     fragment = _clone_tag(node)
     for controls in fragment.select(".passage-controls"):
         controls.decompose()
+    for constrained in fragment.select(".jlpt-passages, .passage"):
+        if constrained.has_attr("style"):
+            constrained["style"] = _strip_style_properties(
+                constrained["style"],
+                {"height", "max-height", "min-height", "overflow"},
+            )
+            if not constrained["style"]:
+                del constrained["style"]
     _resolve_assets(fragment, resolver)
     return str(fragment)
 
@@ -126,29 +171,12 @@ def _build_instruction_html(node: Tag) -> str:
     return str(fragment)
 
 
-def _build_audio_reference_html(node: Tag, resolver: Callable[[str], str]) -> str:
-    fragment = _clone_tag(node)
-    urls = []
-    for source in fragment.select("source[src]"):
-        urls.append(resolver(source["src"]))
-
-    if not urls:
-        return '<div class="audio-reference"><p>No audio source was found for this subsection.</p></div>'
-
-    items = "".join(
-        f'<li><a href="{escape(url)}">{escape(url)}</a></li>'
-        for url in urls
-    )
-    return (
-        '<div class="audio-reference">'
-        "<strong>Audio reference</strong>"
-        "<p>The printable PDF cannot embed playable audio, so the original track links are included below.</p>"
-        f"<ul>{items}</ul>"
-        "</div>"
-    )
-
-
-def _clean_question_html(node: Tag, resolver: Callable[[str], str]) -> str:
+def _clean_question_html(
+    node: Tag,
+    resolver: Callable[[str], str],
+    *,
+    replace_question_images: bool,
+) -> str:
     fragment = _clone_tag(node)
 
     for removable in fragment.select(
@@ -180,6 +208,15 @@ def _clean_question_html(node: Tag, resolver: Callable[[str], str]) -> str:
         script_node = listening_wrapper.select_one(".listening-script")
         if script_node is None or not script_node.get_text(" ", strip=True):
             listening_wrapper.decompose()
+
+    if replace_question_images:
+        for question_images in fragment.select(".question-images"):
+            question_images.replace_with(
+                BeautifulSoup(
+                    _build_question_image_label_html(question_images),
+                    "html.parser",
+                ).find()
+            )
 
     _resolve_assets(fragment, resolver)
     return str(fragment)
@@ -227,6 +264,51 @@ def _resolve_local_path(raw_url: str, source_path: Path) -> str:
         return raw_url
     clean_path = unquote(raw_url.split("?", 1)[0].split("#", 1)[0])
     return (source_path.parent / clean_path).resolve().as_uri()
+
+
+def _strip_style_properties(style_value: str, blocked_properties: set[str]) -> str:
+    kept_rules: list[str] = []
+    for raw_rule in style_value.split(";"):
+        rule = raw_rule.strip()
+        if not rule or ":" not in rule:
+            continue
+        property_name, property_value = rule.split(":", 1)
+        if property_name.strip().lower() in blocked_properties:
+            continue
+        kept_rules.append(f"{property_name.strip()}: {property_value.strip()}")
+    return "; ".join(kept_rules)
+
+
+def _build_question_image_label_html(question_images: Tag) -> str:
+    labels = [_extract_image_label(image) for image in question_images.select("img")]
+    labels = [label for label in labels if label]
+    if not labels:
+        return '<div class="question-image-labels"><div class="question-image-label">Visual reference</div></div>'
+
+    labels_markup = "".join(
+        f'<div class="question-image-label">{label}</div>'
+        for label in labels
+    )
+    return (
+        '<div class="question-image-labels">'
+        '<div class="question-image-labels-title">Visual reference</div>'
+        f"{labels_markup}"
+        "</div>"
+    )
+
+
+def _extract_image_label(image: Tag) -> str:
+    for attribute in ("data-image-title", "alt"):
+        value = image.get(attribute, "").strip()
+        if value:
+            return value
+
+    source = image.get("src", "").strip()
+    if not source:
+        return ""
+
+    filename = Path(unquote(source.split("?", 1)[0].split("#", 1)[0])).stem
+    return re.sub(r"_\d+$", "", filename)
 
 
 def _extract_sidebar_subsection_titles(soup: BeautifulSoup) -> dict[str, str]:
