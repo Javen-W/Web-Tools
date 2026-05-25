@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nihonez-jlpt"
+version = "0.1.0"
+description = "CLI tools for capturing Nihonez JLPT tests and turning them into printable PDFs."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "beautifulsoup4>=4.13,<5",
+  "jinja2>=3.1,<4",
+  "playwright>=1.54,<2",
+]
+
+[project.scripts]
+nihonez-jlpt = "nihonez_jlpt.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+nihonez_jlpt = ["templates/*.j2", "templates/*.css"]

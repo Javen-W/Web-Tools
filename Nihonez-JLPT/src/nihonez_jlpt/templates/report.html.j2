@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ document.title }}</title>
+    <style>{{ stylesheet }}</style>
+  </head>
+  <body>
+    <header class="page-header">
+      <p class="eyebrow">Nihonez JLPT Printable Report</p>
+      <h1>{{ document.title }}</h1>
+      {% if document.description %}
+      <p class="description">{{ document.description }}</p>
+      {% endif %}
+      <div class="meta-grid">
+        <div>
+          <span class="meta-label">Source</span>
+          <span class="meta-value">{{ document.source_label }}</span>
+        </div>
+        <div>
+          <span class="meta-label">Generated</span>
+          <span class="meta-value">{{ document.generated_at }}</span>
+        </div>
+      </div>
+    </header>
+
+    {% for section in document.sections %}
+    <section class="report-section">
+      <div class="section-heading">
+        <h2>{{ section.title }}</h2>
+      </div>
+
+      {% for subsection in section.subsections %}
+      <article class="report-subsection">
+        <h3>{{ subsection.title }}</h3>
+
+        {% for item in subsection.items %}
+        <div class="report-item report-item--{{ item.kind }}">
+          {{ item.html | safe }}
+        </div>
+        {% endfor %}
+      </article>
+      {% endfor %}
+    </section>
+    {% endfor %}
+  </body>
+</html>
