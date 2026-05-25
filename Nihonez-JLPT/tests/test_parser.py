@@ -6,7 +6,8 @@ from nihonez_jlpt.render import render_report_html
 
 FIXTURE = (
     Path(__file__).resolve().parents[1]
-    / "example_html"
+    / "data"
+    / "JLPT N4 Mock Test - July 2025"
     / "JLPT N4 Mock Test – July 2025 - Nihonez.html"
 )
 
