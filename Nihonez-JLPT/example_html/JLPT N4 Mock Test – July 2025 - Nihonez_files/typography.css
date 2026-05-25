@@ -1,0 +1,225 @@
+/* Base styles - Mobile First */
+html {
+  font-size: 16px;
+  line-height: var(--line-height-normal);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Base Typography System */
+/* * {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+} */
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+}
+
+.japanese-text {
+  font-family: "Hiragino Sans", Meiryo, "Yu Gothic", sans-serif;
+}
+
+/* CSS Variables for Color System */
+:root {
+  /* Light Mode Colors */
+  --background: hsl(0, 0%, 100%);
+  --text-primary: hsl(0, 0%, 10%);
+  --text-secondary: hsl(0, 0%, 35%);
+  --text-tertiary: hsl(0, 0%, 55%);
+  --nav-text: hsl(0, 0%, 20%);
+  --nav-text-hover: hsl(0, 0%, 0%);
+}
+
+[data-theme="dark"] {
+  /* Dark Mode Colors */
+  --background: hsl(0, 0%, 10%);
+  --text-primary: hsl(0, 0%, 95%);
+  --text-secondary: hsl(0, 0%, 75%);
+  --text-tertiary: hsl(0, 0%, 55%);
+  --nav-text: hsl(0, 0%, 85%);
+  --nav-text-hover: hsl(0, 0%, 100%);
+}
+
+/* Headings */
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px 0;
+  color: var(--text-primary);
+}
+
+h2 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  margin: 0 0 20px 0;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px 0;
+  color: var(--text-primary);
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.008em;
+  margin: 0 0 14px 0;
+  color: var(--text-secondary);
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  margin: 0 0 12px 0;
+  color: var(--text-secondary);
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.003em;
+  margin: 0 0 10px 0;
+  color: var(--text-secondary);
+}
+
+/* Body Text */
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.003em;
+  margin: 0 0 1rem 0;
+  margin-bottom: 0;
+  color: var(--text-secondary);
+}
+
+/* Small Text */
+small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  letter-spacing: -0.002em;
+  color: var(--text-tertiary);
+}
+
+/* Large Text */
+.text-lg {
+  font-size: 1.075rem;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+  color: var(--text-secondary);
+}
+
+/* Utility Classes */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-tertiary {
+  color: var(--text-tertiary);
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  h4 {
+    font-size: 18px;
+  }
+
+  nav {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+/* Utility Classes */
+.prose {
+  max-width: var(--content-lg);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose-sm {
+  max-width: var(--content-md);
+}
+
+.prose-lg {
+  max-width: var(--content-xl);
+}
+
+/* Common text utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Line clamping */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
