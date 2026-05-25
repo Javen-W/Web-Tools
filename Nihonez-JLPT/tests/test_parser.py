@@ -41,6 +41,8 @@ def test_render_report_html_includes_key_result_content() -> None:
 
     assert "Correct Answer" in report_html
     assert "Question Translation" in report_html
-    assert "Audio reference" in report_html
     assert "下の" in report_html
+    assert "Visual reference" in report_html
+    assert "n4taskbase3" in report_html
+    assert "Audio reference" not in report_html
     assert "file://" in report_html
