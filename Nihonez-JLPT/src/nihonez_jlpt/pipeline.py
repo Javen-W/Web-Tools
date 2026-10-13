@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from pathlib import Path
+import re
 
 from nihonez_jlpt.parser import parse_exam
 from nihonez_jlpt.render import render_exam
@@ -22,6 +23,18 @@ class ExamSource:
 class GenerateResult:
     written: list[str] = field(default_factory=list)
     skipped: list[str] = field(default_factory=list)
+
+
+def exam_markdown_filename(exam_name: str) -> str:
+    """Name the markdown file after the exam, with hyphens between words.
+
+    Spaces become hyphens and a spaced dash such as `` - `` collapses, so
+    ``JLPT N4 Mock Test - July 2025`` becomes
+    ``JLPT-N4-Mock-Test-July-2025.md``.
+    """
+    slug = re.sub(r"\s+", "-", exam_name.strip())
+    slug = re.sub(r"-{2,}", "-", slug)
+    return f"{slug}.md"
 
 
 def discover_exams(data_dir: Path) -> list[ExamSource]:
@@ -49,7 +62,7 @@ def generate_missing(
     result = GenerateResult()
 
     for source in discover_exams(data_dir):
-        markdown_path = output_dir / source.name / "exam.md"
+        markdown_path = output_dir / source.name / exam_markdown_filename(source.name)
         if markdown_path.exists():
             result.skipped.append(source.name)
             continue
