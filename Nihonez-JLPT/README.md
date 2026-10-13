@@ -1,23 +1,31 @@
 # Nihonez JLPT
 
-Python CLI for capturing Nihonez JLPT test result pages and converting them into printable PDFs.
+Turn saved Nihonez JLPT exam pages into markdown.
 
-## Commands
+## Layout
+
+- `.data/<exam-name>/` holds one saved results HTML file and its downloaded assets.
+- `outputs/<exam-name>/exam.md` is the generated exam.
+- `outputs/<exam-name>/media/` holds the images that exam references.
+
+Listening sections include transcripts. Audio files are not copied.
+
+## Generate
+
+Open [`generate_exams.ipynb`](generate_exams.ipynb) and run it. The notebook writes markdown for every exam in `.data/` that does not already have `outputs/<exam-name>/exam.md`.
+
+The same pipeline can be run from a terminal:
 
 ```bash
-nihonez-jlpt capture "https://nihonez.com/jlpt-test/..." captured.html --storage-state storage-state.json
-nihonez-jlpt render
-nihonez-jlpt render "JLPT N4 Mock Test - July 2025"
-nihonez-jlpt render "JLPT N4 Mock Test - July 2025" --output-pdf custom-output.pdf
-nihonez-jlpt build "https://nihonez.com/jlpt-test/..." output.pdf --storage-state storage-state.json --captured-html captured.html --report-html report.html
+python -m nihonez_jlpt
 ```
 
-## Notes
+Delete an exam's `exam.md` to generate it again.
 
-- Saved fixtures live under `Nihonez-JLPT/data/<test-name>/`, with one source HTML file per test directory.
-- `render` with no test name renders every test in `data/`.
-- `render "<test-name>"` writes `<test-name>.pdf` inside that test directory by default.
-- `build` accepts either a Nihonez URL or a local saved results HTML file.
-- When given a live URL, the CLI auto-selects answers, submits the test, then renders the result page.
-- Nihonez currently shows a login gate on public test URLs, so live capture requires an authenticated Playwright storage-state JSON file.
-- Install the Chromium browser once with `python -m playwright install chromium`.
+## Tests
+
+From the repository root:
+
+```bash
+pytest
+```

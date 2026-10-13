@@ -1,4 +1,4 @@
-"""Nihonez JLPT CLI package."""
+"""Generate markdown JLPT exams from saved Nihonez results pages."""
 
 __all__ = ["__version__"]
 
