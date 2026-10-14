@@ -219,3 +219,6 @@ __marimo__/
 
 # Generated JLPT markdown exams
 # Nihonez-JLPT/outputs/
+
+.data/
+Nihonez-JLPT/.data/
